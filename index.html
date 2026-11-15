@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Autonomous Stock Portfolio Balancing Engine</title>
+  <script src="https://leaningtech.com"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #1e1e1e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    (async function () {
+      await cheerpjInit();
+      cheerpjCreateDisplay(1100, 700);
+      await cheerpjRunJar("/app/PortfolioApp/PortfolioApp.jar");
+    })();
+  </script>
+</body>
+</html>
