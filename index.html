@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=0.35, maximum-scale=2.0, user-scalable=yes" />
   <title>Autonomous Stock Portfolio Balancing Engine</title>
-  <script src="https://leaningtech.com"></script>
+  <script src="https://cjrtnc.leaningtech.com/5.0/loader.js"></script>
   <style>
     body {
       margin: 0;
@@ -22,19 +22,21 @@
 <body>
   <div id="status" style="font-size: 28px; margin-bottom: 20px;">Loading Java Runtime...</div>
   <script>
-    (async function () {
+    window.addEventListener("load", async function () {
       const status = document.getElementById("status");
       try {
+        if (typeof cheerpjInit === "undefined") {
+          throw new Error("CheerpJ script failed to load. Check your internet connection or refresh.");
+        }
         await cheerpjInit({ version: 17 });
         status.textContent = "Starting PortfolioApp...";
         cheerpjCreateDisplay(1100, 700);
-        const basePath = window.location.pathname.replace(/\/[^\/]*$/, "");
-        await cheerpjRunJar("/app" + basePath + "/PortfolioApp.jar");
+        await cheerpjRunJar("/app/PortfolioApp/PortfolioApp.jar");
         status.style.display = "none";
       } catch (err) {
-        status.textContent = "Error: " + err;
+        status.textContent = "Error: " + err.message;
       }
-    })();
+    });
   </script>
 </body>
 </html>
