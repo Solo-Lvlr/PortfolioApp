@@ -2,25 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.35, maximum-scale=2.0, user-scalable=yes" />
   <title>Autonomous Stock Portfolio Balancing Engine</title>
   <script src="https://leaningtech.com"></script>
   <style>
     body {
       margin: 0;
       background-color: #1e1e1e;
+      color: #ffffff;
+      font-family: sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
   </style>
 </head>
 <body>
+  <div id="status" style="font-size: 28px; margin-bottom: 20px;">Loading Java Runtime...</div>
   <script>
     (async function () {
-      await cheerpjInit();
-      cheerpjCreateDisplay(1100, 700);
-      await cheerpjRunJar("/app/PortfolioApp/PortfolioApp.jar");
+      const status = document.getElementById("status");
+      try {
+        await cheerpjInit({ version: 17 });
+        status.textContent = "Starting PortfolioApp...";
+        cheerpjCreateDisplay(1100, 700);
+        const basePath = window.location.pathname.replace(/\/[^\/]*$/, "");
+        await cheerpjRunJar("/app" + basePath + "/PortfolioApp.jar");
+        status.style.display = "none";
+      } catch (err) {
+        status.textContent = "Error: " + err;
+      }
     })();
   </script>
 </body>
